@@ -1,26 +1,25 @@
-#include <Keyboard.h>
-#include <KeyboardLayout.h>
-#include <Keyboard_da_DK.h>
-#include <Keyboard_de_DE.h>
-#include <Keyboard_es_ES.h>
-#include <Keyboard_fr_FR.h>
-#include <Keyboard_hu_HU.h>
-#include <Keyboard_it_IT.h>
-#include <Keyboard_pt_PT.h>
-#include <Keyboard_sv_SE.h>
-
+#include <IRremote.hpp> //Used https://www.makerguides.com/ir-receiver-remote-arduino-tutorial/ for help on IR sensers
 #include <EEPROM.h>
-
 #include <LiquidCrystal.h>
 
 int players = 6;
+#define IR_RECEIVE_PIN 2
 
-void setup() {
+
+void setup() 
+{
   Serial.begin(9600);
-
+  pinMode(buzzer, OUTPUT);
+  pinMode(, INPUT);
+  delay(100);
 }
 
-void loop() {
-  
-
+void loop() 
+{
+  if (IrReceiver.decode()) 
+  {
+    uint16_t command = IrReceiver.decodedIRData.command;
+    delay(100);
+    IrReceiver.resume();
+  }
 }
